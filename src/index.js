@@ -39,6 +39,28 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+    let str = "";
+    let arr = expr.match(/(.{1,10})/gim) || '';
+    for (let i = 0; i <= arr.length-1; i++) {
+        if (arr[i] == "**********") {
+            str = str + " ";
+        }
+        else {
+            let numberWithoutZero = parseInt(arr[i], 10).toString();
+            
+            numberWithoutZero = numberWithoutZero.replace(/10/g, ".").replace(/11/g, "-");
+
+            for (const morseTableItem in MORSE_TABLE) {
+              if (numberWithoutZero == morseTableItem)  {
+                str = str + MORSE_TABLE[morseTableItem];
+              }
+            }
+        }
+    }
+
+    return str;
+
+
 }
 
 module.exports = {
